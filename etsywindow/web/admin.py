@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Account, User, Listing
+from .models import Store, User, Listing
 
 admin.site.register([
-    Account,
+    Store,
     User,
     Listing,
 ])
