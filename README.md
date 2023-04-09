@@ -30,7 +30,7 @@ $ pip install -r requirements.txt
 ```shell
 $ # Run the local server
 $
-$ cd etsywind
+$ cd etsywindow
 $ python manage.py runserver
 ```
 
