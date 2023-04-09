@@ -19,6 +19,12 @@ $ # Windows
 $ source .venv/Scripts/activate
 ```
 
+```shell
+$ # Install deps (highly suggest you use the virtualenv)
+$
+$ pip install -r requirements.txt
+```
+
 ## Running the server
 
 ```shell
