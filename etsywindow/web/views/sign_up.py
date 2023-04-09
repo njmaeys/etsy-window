@@ -1,51 +1,36 @@
+from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from ..models import User
+from django.contrib.auth.models import User
 
 
 def sign_up(request):
     if request.method == 'POST':
-    # create a User instance with the validated form data
-        user = User(
-            first_name=request.POST['first-name'],
-            last_name=request.POST['last-name'],
-            email_address=request.POST['email'],
-        )
-        print("\n### HERE ###")
-        print("email:", user.first_name)
-        print("email:", user.last_name)
-        print("email:", user.email_address)
-        if not user.email_address:
-            # TODO: Force email required on form
-            messages.error(request, "Email is required")
-            context = {
-                'first_name': request.POST.get('first-name', ''),
-                'last_name': request.POST.get('last-name', ''),
-                'email_address': '',
-            }
-            return render(request, 'sign_up.html', context=context)
-
-        # set and validate the password
+        # create a User instance with the validated form data
+        first_name = request.POST['first-name']
+        last_name = request.POST['last-name']
+        email = request.POST['email']
         password = request.POST['password']
-        password_verify = request.POST['password-verify']
 
-        if password != password_verify:
-            # TODO: Force password required on form
-            # TODO: Add a toast pop up for the user
-            messages.error(request, "Passwords do not match")
-            # TODO: Redirect but keep form populated
+        if not email:
+            messages.error(request, "Email is required")
             return redirect('sign-up')
 
-        # TODO: Need to figure out this password stuff
-        #user.password(password)
+        # check if a user with the given email already exists
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "A user with that email already exists")
+            return redirect('sign-up')
 
-        # save the user to the database
-        user.save()
+        # hash the password and create the user
+        hashed_password = make_password(password)
+        User.objects.create(
+            first_name=first_name,
+            last_name=last_name,
+            username=email,
+            email=email,
+            password=hashed_password,
+        )
+        messages.success(request, "Account created successfully!")
+        return redirect('login')
 
-        messages.success(request, "Your account has been created!")
-
-        return redirect('home') # TODO Need to get this to a different portal page
-    else:
-        # TODO: If all goes well then redirect to the portal as a logged in user
-        #return redirect('home') # TODO Need to get this to a different portal page
-        return render(request, 'sign_up.html')
+    return render(request, 'sign_up.html')
