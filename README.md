@@ -45,7 +45,7 @@ $ python manage.py test web.tests
 $
 $ # Run a single test class
 $
-$ python manage.py test web.tests.test_index.IndexViewTest
+$ python manage.py test web.tests.test_index.TestIndexView
 ```
 
 ## Database commands
