@@ -7,7 +7,6 @@ class TestLoginView(TestCase):
     def setUp(self):
         self.client = Client()
         self.login_url = reverse('login')
-        self.home_url = reverse('home')
         self.portal_url = reverse('portal-home')
         self.username = 'testuser'
         self.password = 'testpass'
