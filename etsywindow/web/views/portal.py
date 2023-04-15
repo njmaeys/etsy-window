@@ -40,8 +40,7 @@ def portal_home(request):
         else:
             return render(request, 'portal_home.html', context=context)
     else:
-        store = stores[0]
-        context['store'] = store
+        context['stores'] = stores
         context['has_store'] = True
 
         return render(request, 'portal_home.html', context=context)

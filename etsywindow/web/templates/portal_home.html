@@ -7,10 +7,18 @@
         {% if has_store %}
         <div class="col-md-6">
             <h2>Store Information</h2>
-            <ul class="list-group">
-                <li class="list-group-item"><b>Store Name:</b> {{ store.store_name}}</li>
-                <li class="list-group-item"><b>Store ID:</b> {{ store.etsy_store_id }}</li>
-                <li class="list-group-item"><b>Last Updated:</b> {{ store.updated_at }}</li>
+              <ul>
+                {% for store in stores %}
+                <div>
+                    <h3><b>{{ store.store_name }}</b></h3>
+                    <div>
+                        <li>
+                            <p><b>Store Id:</b> {{ store.etsy_store_id }}</p>
+                            <p><b>Store Url:</b> <a href="{{ store.store_url }}" target="_blank">{{ store.store_url }}</a></p>
+                        </li>
+                    </div>
+                </div>
+                {% endfor %}
             </ul>
         </div>
         {% else %}
