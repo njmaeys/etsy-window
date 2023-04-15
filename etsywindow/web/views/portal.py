@@ -10,7 +10,6 @@ def portal_home(request):
     
     context = {
         'has_store': False,
-        'store': None,
     }
 
     stores = Store.objects.filter(user_id=request.user)
@@ -23,6 +22,11 @@ def portal_home(request):
             if not store_data:
                 context['message'] = 'The store you entered does not exist.'
                 return render(request, 'portal_home.html', context=context)
+            
+            store = store_data[0]
+            context['store_id'] = store['shop_id']
+            context['store_name'] = store['shop_name']
+            context['store_url'] = store['url']
 
             return render(request, 'confirm_store.html', context=context)
         elif request.method == 'POST' and request.POST.get('action') == 'confirm_store':
@@ -36,7 +40,10 @@ def portal_home(request):
         else:
             return render(request, 'portal_home.html', context=context)
     else:
+        store = stores[0]
+        context['store'] = store
         context['has_store'] = True
+
         return render(request, 'portal_home.html', context=context)
 
     
