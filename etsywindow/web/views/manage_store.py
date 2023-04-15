@@ -1,14 +1,21 @@
 from django.shortcuts import render, redirect
 
-from ..models import Store
-from .utils.etsy_helper import get_shop_data
+from ..models import Store, Listing
 
 
-def manage_store(request):
+def manage_store(request, store_id):
     if not request.user.is_authenticated:
         return redirect('login')
     
-    print("\n### HERE ###")
-    print(request)
+    store = Store.objects.filter(user_id=request.user, etsy_store_id=store_id).first()
+    listings = Listing.objects.filter(store_id=store.id)
+    print("\n### LISTINGS ###")
+    for l in listings:
+        print(l.id, l.image_url)
 
-    return render(request, 'manage_store.html')
+
+    context = {
+        'store': store
+    }
+
+    return render(request, 'manage_store.html', context=context)

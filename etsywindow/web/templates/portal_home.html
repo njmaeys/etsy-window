@@ -30,7 +30,9 @@
                             <p><b>Store Url:</b> <a href="{{ store.store_url }}" target="_blank">{{ store.store_url }}</a></p>
                         </li>
                     </div>
-                    <button name="action" type="submit" class="btn btn-primary" value="manage_store">Manage Store</button>
+                    <div style="padding-bottom: 20px;">
+                        <a class="btn btn-primary" href="{% url 'manage-store' store_id=store.etsy_store_id %}">Manage Store</a>
+                    </div>
                 </div>
                 {% endfor %}
             </ul>

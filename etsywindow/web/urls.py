@@ -14,6 +14,6 @@ urlpatterns = [
     path('contact/', contact, name='contact'),
     path('sign-up/', sign_up, name='sign-up'),
     path('portal-home/', portal_home, name='portal-home'),
-    path('manage-store/', manage_store, name='manage-store'),
+    path('manage-store/<int:store_id>', manage_store, name='manage-store'),
     path('logout/', logout_view, name='logout'),
 ]

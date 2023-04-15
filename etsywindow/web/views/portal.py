@@ -18,8 +18,6 @@ def portal_home(request):
 
     if request.method == 'POST':
         if request.POST.get('action') == 'add_store':
-            print("\n### HERE ###")
-            print("Lookup store")
             store_name = request.POST.get('store-name')
             store_data = get_shop_data(store_name=store_name)
 
@@ -42,10 +40,6 @@ def portal_home(request):
                 store_url=request.POST.get('store_url')
             )
             return redirect('portal-home')
-        elif request.POST.get('action') == 'manage_store':
-            print("\n### HERE ###")
-            print("Manage store request")
-            return render(request, 'manage_store.html', context=context)
         else:
             return render(request, 'portal_home.html', context=context)
     else:
