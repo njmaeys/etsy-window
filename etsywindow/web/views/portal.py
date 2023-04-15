@@ -26,19 +26,17 @@ def portal_home(request):
 
             return render(request, 'confirm_store.html', context=context)
         elif request.method == 'POST' and request.POST.get('action') == 'confirm_store':
-            print("\n### HERE ###")
-            print("store_id:", request.POST.get('store_id'))
             Store.objects.create(
                 user_id=request.user,
                 etsy_store_id=request.POST.get('store_id'),
                 store_name=request.POST.get('store_name'),
                 store_url=request.POST.get('store_url')
             )
-            return redirect('portal_home')
+            return redirect('portal-home')
         else:
-            return redirect('portal_home')
+            return render(request, 'portal_home.html', context=context)
     else:
         context['has_store'] = True
-        return redirect('portal_home')
+        return render(request, 'portal_home.html', context=context)
 
     

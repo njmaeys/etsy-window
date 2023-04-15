@@ -12,5 +12,8 @@
             <button class="btn btn-primary" name="action" value="confirm_store" type="submit" name="confirm">Confirm</button>
             <button class="btn" type="submit" name="cancel">Cancel</button>
         </div>
+        <input type="hidden" name="store_id" value="{{ store_id }}">
+        <input type="hidden" name="store_name" value="{{ store_name }}">
+        <input type="hidden" name="store_url" value="{{ store_url }}">
     </form>
 {% endblock %}
