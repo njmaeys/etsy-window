@@ -8,6 +8,7 @@ class Store(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     etsy_store_id = models.CharField(max_length=250)
     store_name = models.CharField(max_length=250)
+    store_url = models.CharField(max_length=250)
     created_at = models.DateTimeField(auto_created=True, default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib import messages
 
 from ..models import Store
 from .utils.etsy_helper import get_shop_data
@@ -13,44 +12,33 @@ def portal_home(request):
         'has_store': False,
         'store': None,
     }
-    
+
     stores = Store.objects.filter(user_id=request.user)
     if not stores:
-        # Show the add store form
-        if request.method == 'POST':
-            if request.POST.get('action') == 'add_store':
-                # Lookup the store data from Etsy
-                store_name = request.POST.get('store-name', None)
-                store_data = get_shop_data(store_name=store_name)
-                store_data = store_data['results'][0]
+        if request.method == 'POST' and request.POST.get('action') == 'add_store':
+            store_name = request.POST.get('store-name')
+            store_data = get_shop_data(store_name=store_name)
 
-                store_id = store_data['shop_id']
-                store_name = store_data['shop_name']
-                store_url = store_data['url']
+            store_data = store_data.get('results', None)
+            if not store_data:
+                context['message'] = 'The store you entered does not exist.'
+                return render(request, 'portal_home.html', context=context)
 
-                if not store_name:
-                    messages.error(request, "Store not found.")
-                    return redirect('portal-home')
-                
-                ## Create the store object
-                #Store.objects.create(
-                #    user_id_id=request.user.id,
-                #    store_name=store_name,
-                #    etsy_store_id=store_id,
-                #)
-
-                """
-                TODO: Start back here and add in the confirmation template of the data
-                """
-
-
-                messages.success(request, "Store created successfully!")
-                return redirect('portal-home')
+            return render(request, 'confirm_store.html', context=context)
+        elif request.method == 'POST' and request.POST.get('action') == 'confirm_store':
+            print("\n### HERE ###")
+            print("store_id:", request.POST.get('store_id'))
+            Store.objects.create(
+                user_id=request.user,
+                etsy_store_id=request.POST.get('store_id'),
+                store_name=request.POST.get('store_name'),
+                store_url=request.POST.get('store_url')
+            )
+            return redirect('portal_home')
         else:
-            return render(request, 'portal_home.html', context)
-    
-    context['has_store'] = True
-    context['store'] = stores[0]
+            return redirect('portal_home')
+    else:
+        context['has_store'] = True
+        return redirect('portal_home')
 
-    return render(request, 'portal_home.html', context)
     

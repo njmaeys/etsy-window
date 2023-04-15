@@ -18,6 +18,9 @@
             <h2>Add New Store</h2>
             <form method="post">
                 {% csrf_token %}
+                {% if message %}
+                    <div class="alert alert-danger" style="color: #0b7064; padding: 10px; font-weight: bold;">{{ message }}</div>
+                {% endif %}
                 <div class="form-group">
                     <label for="store-name">Store Name</label>
                     <input type="text" name="store-name" id="store-name" class="form-control">
