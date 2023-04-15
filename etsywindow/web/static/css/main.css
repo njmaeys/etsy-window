@@ -130,8 +130,8 @@ p {
 .btn {
   border-color: #000000;
   border-style: solid;
-  border-radius: 20px;
-  padding: 10px 20px;
+  border-radius: 15px;
+  padding: 5px 15px;
   text-decoration: none;
   color: #333;
   font-weight: bold;
