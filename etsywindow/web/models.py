@@ -2,6 +2,18 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+"""
+Simple note to myself. Put this somewhere later.
+It would be cool to allow the user to set an order
+for their listings. Should be as simple as putting
+a `priority` on the listings table. This will be interesting
+to implement tho 
+
+Another cool idea would be to allow the user to
+select if they want to display an item or not. Should
+be able to put a `display` bool column on the listing
+and only return back where display == True
+"""
 
 class Store(models.Model):
     id = models.IntegerField(primary_key=True, auto_created=True)

@@ -9,9 +9,40 @@ html,body {
 }
 
 .footer {
-    height: 100px;
-    margin-top: -100px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
 }
+
+footer ul {
+  display: flex;
+  list-style: none;
+}
+
+footer a {
+  text-decoration: none;
+  margin-right: 10px;
+  color: #333;
+}
+
+/* ---------------- base thing fixes ----------------------- */
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+}
+/* --------------------------------------- */
 
 /* Header */
 header {
@@ -48,26 +79,6 @@ nav a {
   color: #333;
   font-weight: bold;
   font-size: 18px;
-}
-
-/* Footer */
-footer {
-  background-color: #f8f8f8;
-  padding: 20px;
-  text-align: center;
-  font-size: 14px;
-  color: #777;
-}
-
-footer ul {
-  display: flex;
-  list-style: none;
-}
-
-footer a {
-  text-decoration: none;
-  margin-right: 10px;
-  color: #333;
 }
 
 
@@ -228,3 +239,4 @@ input[type="submit"] {
 button {
   all: unset;
 }
+

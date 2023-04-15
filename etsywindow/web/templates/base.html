@@ -11,6 +11,7 @@
     <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
 </head>
 <body>
+    <div id="page-container">
     <header class="header">
         <a class="navbar-brand" href="{% url 'home' %}">Etsy Window</a>
         {% if user.is_authenticated %}
@@ -26,16 +27,16 @@
         {% endif %}
     </header>
 
-
+    <div id="content-wrap">
     <main class="main">
         <div class="container">
             {% block content %}
             {% endblock %}
         </div>
     </main>
+    </div>
 
-
-    <footer class="footer">
+    <footer class="footer" id="footer">
         <div class="container">
             <p>&copy; {{ year }} Etsy Window</p>
         </div>
@@ -54,6 +55,7 @@
             </li>
         </ul>
     </footer>
-    
+
+    </div>
 </body>
 </html>
