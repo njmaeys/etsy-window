@@ -5,26 +5,6 @@
 {% block content %}
     <div class="row" style="padding-top: 10px;">
         <div class="col-md-6">
-            <h2>Store Information</h2>
-              <ul>
-                {% for store in stores %}
-                <div class="store-box">
-                    <h3><b style="color: #0b7064;">{{ store.store_name }}</b></h3>
-                    <div>
-                        <li>
-                            <p><b>Store Id:</b> {{ store.etsy_store_id }}</p>
-                            <p><b>Store Url:</b> <a href="{{ store.store_url }}" target="_blank">{{ store.store_url }}</a></p>
-                        </li>
-                    </div>
-                    {% csrf_token %}
-                    <div class="ml-auto">
-                        <button name="action" type="submit" class="btn btn-primary" value="manage_store">Manage Store</button>
-                    </div>
-                </div>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="col-md-6">
             <h2>Add New Store</h2>
             <form method="post">
                 {% csrf_token %}
@@ -37,6 +17,23 @@
                 </div>
                 <button name="action" type="submit" class="btn btn-primary" value="add_store">Lookup Store</button>
             </form>
+        </div>
+        <div class="col-md-6">
+            <h2>Store Information</h2>
+              <ul>
+                {% for store in stores %}
+                <div class="store-box">
+                    <h3><b style="color: #0b7064;">{{ store.store_name }}</b></h3>
+                    <div>
+                        <li>
+                            <p><b>Store Id:</b> {{ store.etsy_store_id }}</p>
+                            <p><b>Store Url:</b> <a href="{{ store.store_url }}" target="_blank">{{ store.store_url }}</a></p>
+                        </li>
+                    </div>
+                    <button name="action" type="submit" class="btn btn-primary" value="manage_store">Manage Store</button>
+                </div>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 {% endblock %}
