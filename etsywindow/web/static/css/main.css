@@ -127,6 +127,14 @@ p {
   cursor: pointer;
 }
 
+/* Store info */
+.store-box {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
 
 /* General */
 ul {
@@ -135,7 +143,6 @@ ul {
 li {
   list-style-type: none;
 }
-
 
 /* Landing Page */
 .landing-page {

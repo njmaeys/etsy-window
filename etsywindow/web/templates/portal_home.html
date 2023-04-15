@@ -9,16 +9,22 @@
             <h2>Store Information</h2>
               <ul>
                 {% for store in stores %}
-                <div>
-                    <h3><b>{{ store.store_name }}</b></h3>
+                <div class="store-box">
+                    <h3><b style="color: #0b7064;">{{ store.store_name }}</b></h3>
                     <div>
                         <li>
                             <p><b>Store Id:</b> {{ store.etsy_store_id }}</p>
                             <p><b>Store Url:</b> <a href="{{ store.store_url }}" target="_blank">{{ store.store_url }}</a></p>
                         </li>
                     </div>
+                    <div class="ml-auto">
+                        <button name="action" type="submit" class="btn btn-primary" value="manage_store">Manage Store</button>
+                    </div>
                 </div>
                 {% endfor %}
+                <div class="ml-auto">
+                    <button name="action" type="submit" class="btn" value="add_store">Add Store</button>
+                </div>
             </ul>
         </div>
         {% else %}
