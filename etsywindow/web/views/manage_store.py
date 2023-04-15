@@ -9,10 +9,13 @@ def manage_store(request, store_id):
     
     store = Store.objects.filter(user_id=request.user, etsy_store_id=store_id).first()
     listings = Listing.objects.filter(store_id=store.id)
-    print("\n### LISTINGS ###")
-    for l in listings:
-        print(l.id, l.image_url)
 
+    """
+    The store listings now need to be created as a new section.
+    I want to get the listings layed out.
+
+    I need to click the trash can and have a confirmation pop up.
+    """
 
     context = {
         'store': store

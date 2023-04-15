@@ -3,10 +3,13 @@
 {% block title %}Manage Store{% endblock %}
 
 {% block content %}
-    <section class="landing-page">
+    <section>
         <h1>Manage Store</h1>
         <div class="store-box">
             <h3><b style="color: #0b7064;">{{ store.store_name }}</b></h3>
+            <div class="delete-store">
+                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
             <div>
                 <li>
                     <p><b>Store Id:</b> {{ store.etsy_store_id }}</p>
