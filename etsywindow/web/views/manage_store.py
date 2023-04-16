@@ -26,7 +26,7 @@ def manage_store(request, store_id):
             return render(request, 'confirm_delete_store.html', context=context)
 
         if request.POST.get('action') == 'confirm_delete_store':
-            Store.objects.delete(store)
+            store.delete()
             return redirect('portal-home')
 
         if request.POST.get('action') == 'delete_listing':
