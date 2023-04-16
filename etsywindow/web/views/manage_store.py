@@ -2,12 +2,6 @@ from django.shortcuts import render, redirect
 
 from ..models import Store, Listing
 
-"""
-The store listings now need to be created as a new section.
-I want to get the listings layed out.
-
-I need to click the trash can and have a confirmation pop up.
-"""
 
 def manage_store(request, store_id):
     if not request.user.is_authenticated:

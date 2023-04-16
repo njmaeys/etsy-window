@@ -21,6 +21,9 @@
     </section>
     <section>
         <h1>Listings</h1>
+        <div style="padding-bottom: 20px;">
+            <button class="btn btn-primary" name="action" value="update_listing" type="submit" name="update_listings">Update Listings</button>
+        </div>
         <div class="listings-container">
             {% for listing in listings %}
             <form method="post" class="form-left">
