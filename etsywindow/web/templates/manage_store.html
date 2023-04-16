@@ -7,8 +7,9 @@
         <h1>Manage Store</h1>
         <div class="store-box">
             <h3><b style="color: #0b7064;">{{ store.store_name }}</b></h3>
+            {% csrf_token %}
             <div class="delete-store">
-                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                <button class="delete-btn" name="action" type="submit" value="delete_store"><i class="fas fa-trash"></i></button>
             </div>
             <div>
                 <li>
