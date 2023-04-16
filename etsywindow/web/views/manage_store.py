@@ -16,16 +16,30 @@ def manage_store(request, store_id):
     store = Store.objects.filter(user_id=request.user, etsy_store_id=store_id).first()
     listings = Listing.objects.filter(store_id=store.id)
 
-    print("\n### HERE ###")
     if request.method == 'POST':
         if request.POST.get('action') == 'delete_store':
-            print("\n### DELETE STORE ###")
-            print("store id:", store.id)
-            print("etsy store id:", store.etsy_store_id)
+            context = {
+                "store_id": store.id,
+                "store_name": store.store_name,
+                "store_url": store.store_url,
+            }
+            return render(request, 'confirm_delete_store.html', context=context)
+
+        if request.POST.get('action') == 'confirm_delete_store':
+            Store.objects.delete(store)
+            return redirect('portal-home')
+
+        if request.POST.get('action') == 'delete_listing':
+            print("\n### Delete Listing ###")
+            listing_id = request.POST.get('listing_id')
+            listing_title = request.POST.get('listing_title')
+            print("listing id:", listing_id)
+            print("listing title:", listing_title)
 
 
     context = {
-        'store': store
+        'store': store,
+        'listings': listings,
     }
 
     return render(request, 'manage_store.html', context=context)

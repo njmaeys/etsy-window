@@ -4,19 +4,40 @@
 
 {% block content %}
     <section>
-        <h1>Manage Store</h1>
-        <div class="store-box">
-            <h3><b style="color: #0b7064;">{{ store.store_name }}</b></h3>
+        <h1 style="color: #0b7064;">{{ store.store_name }}</h1>
+        <form method="post" class="form-left">
             {% csrf_token %}
-            <div class="delete-store">
-                <button class="delete-btn" name="action" type="submit" value="delete_store"><i class="fas fa-trash"></i></button>
-            </div>
+            <button class="delete-btn" name="action" type="submit" value="delete_store">
+                <i class="fas fa-trash"></i>
+            </button>
             <div>
+                <h3>Basic Information</h3>
                 <li>
                     <p><b>Store Id:</b> {{ store.etsy_store_id }}</p>
                     <p><b>Store Url:</b> <a href="{{ store.store_url }}" target="_blank">{{ store.store_url }}</a></p>
                 </li>
             </div>
+        </form>
+    </section>
+    <section>
+        <h1>Listings</h1>
+        <div class="listings-container">
+            {% for listing in listings %}
+            <form method="post" class="form-left">
+                <div>
+                    <h3 style="color: #0b7064;">{{ listing.title }}</h3>
+                    <li>
+                        <p><b>Listing Id:</b> {{ listing.listing_id }}</p>
+                    </li>
+                    {% csrf_token %}
+                    <input type="hidden" name="listing_id" value="{{ listing.listing_id }}">
+                    <input type="hidden" name="listing_title" value="{{ listing.title }}">
+                    <button class="delete-btn" name="action" type="submit" value="delete_listing">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </form>
+            {% endfor %}
         </div>
     </section>
 {% endblock %}

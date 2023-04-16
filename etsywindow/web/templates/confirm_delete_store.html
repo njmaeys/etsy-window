@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Please Confirm Store Deletion</h2>
+    <form method="post">
+        <p><b>Store Name:</b> {{ store_name }}</p>
+        <p><b>Store ID:</b> {{ store_id }}</p>
+        <p><b>Store URL:</b> <a href="{{ store_url }}" target="_blank">{{ store_url }}</a></p>
+    
+        {% csrf_token %}
+        <div class="ml-auto">
+            <button class="btn btn-primary" name="action" value="confirm_delete_store" type="submit" name="confirm_delete">Delete</button>
+            <button class="btn" type="submit" name="cancel">Cancel</button>
+        </div>
+        <input type="hidden" name="store_id" value="{{ store_id }}">
+    </form>
+{% endblock %}
