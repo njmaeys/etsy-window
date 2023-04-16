@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 
 from ..models import Store, Listing
 
@@ -14,9 +15,15 @@ def manage_store(request, store_id):
         return redirect('portal-home')
 
     listings = Listing.objects.filter(store_id=store.id)
+
+    # Setup the paginator
+    paginator = Paginator(listings, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
         'store': store,
-        'listings': listings,
+        'listings': page_obj,
     }
 
     if request.method == 'POST':
