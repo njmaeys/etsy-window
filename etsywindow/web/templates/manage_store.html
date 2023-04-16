@@ -22,7 +22,7 @@
     <h1>Listings</h1>
 
     <div style="padding-bottom: 20px;">
-        <button class="btn btn-primary" name="action" value="update_listing" type="submit" name="update_listings">Update Listings</button>
+        <button class="btn btn-primary" name="action" value="update_listing" type="submit" name="update_listings">Refresh Listings</button>
     </div>
 
     <div class="listings-container">
@@ -45,21 +45,22 @@
     </div>
 
     {% if listings.has_other_pages %}
-    <div class="paginator">
+    <div class="pagination">
         {% if listings.has_previous %}
-        <a href="?page={{ listings.previous_page_number }}" class="pagination-link">prev</a>
+        <a href="?page={{ listings.previous_page_number }}" class="pagination-link">Prev</a>
         {% endif %}
         <span class="current-page">{{ listings.number }}</span>
         {% if listings.has_next %}
-        <a href="?page={{ listings.next_page_number }}" class="pagination-link">next</a>
+        <a href="?page={{ listings.next_page_number }}" class="pagination-link">Next</a>
         {% endif %}
+        {% if listings.paginator.num_pages > listings.number %}
+        {% for page_num in page_obj.paginator.page_range %}
+            {% if page_num > page_obj.number and page_num <= page_obj.number|add:3 %}
+                <a href="?page={{ page_num }}">{{ page_num }}</a>
+            {% endif %}
+        {% endfor %}
+        <span class="total-pages">Total {{ listings.paginator.num_pages }}</span>
     </div>
     {% endif %}
-    {% if listings.paginator.num_pages > listings.number %}
-    {% for page_num in page_obj.paginator.page_range %}
-        {% if page_num > page_obj.number and page_num <= page_obj.number|add:3 %}
-            <a href="?page={{ page_num }}">{{ page_num }}</a>
-        {% endif %}
-    {% endfor %}
   {% endif %}
 {% endblock %}

@@ -276,14 +276,16 @@ button {
 
 
 /* Paginator */
-.paginator {
+.pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
 }
 
-.paginator a {
+.pagination a,
+.pagination .current-page,
+.pagination .total-pages {
   font-size: 16px;
   font-weight: bold;
   color: #333;
@@ -294,12 +296,12 @@ button {
   margin: 0 5px;
 }
 
-.paginator a:hover {
+.pagination a:hover {
   background-color: #333;
   color: #fff;
 }
 
-.paginator .current {
+.pagination .current {
   background-color: #333;
   color: #fff;
 }
