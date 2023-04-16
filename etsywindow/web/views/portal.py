@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.utils import IntegrityError
 
 from ..models import Store
 from .utils.etsy_helper import get_shop_data
@@ -33,13 +34,19 @@ def portal_home(request):
 
             return render(request, 'confirm_store.html', context=context)
         elif request.POST.get('action') == 'confirm_store':
-            Store.objects.create(
-                user_id=request.user,
-                etsy_store_id=request.POST.get('store_id'),
-                store_name=request.POST.get('store_name'),
-                store_url=request.POST.get('store_url')
-            )
-            return redirect('portal-home')
+            try:
+                Store.objects.create(
+                    user_id=request.user,
+                    etsy_store_id=request.POST.get('store_id'),
+                    store_name=request.POST.get('store_name'),
+                    store_url=request.POST.get('store_url')
+                )
+            except IntegrityError:
+                context['message'] = 'That store already exists.'
+                return render(request, 'portal_home.html', context=context)
+
+            context['message'] = 'Store added successfully.'
+            return render(request, 'portal_home.html', context=context)
         else:
             return render(request, 'portal_home.html', context=context)
     else:

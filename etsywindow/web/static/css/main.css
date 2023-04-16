@@ -126,10 +126,8 @@ p {
   margin-bottom: 20px;
 }
 
-
 .btn {
   border-color: #000000;
-  border-style: solid;
   border-radius: 15px;
   padding: 5px 15px;
   text-decoration: none;
@@ -137,17 +135,20 @@ p {
   font-weight: bold;
   font-size: 18px;
 }
+
 .btn:hover{
   background-color: #000000;
   border-color: #000000;
   color: #ffffff;
   cursor: pointer;
 }
+
 .btn-primary {
   background-color: #2fd9c5;
   border-color: #2fd9c6;
   color: #000000;
 }
+
 .btn-primary:hover {
   background-color: #0b7064;
   border-color: #0b7064;

@@ -24,6 +24,9 @@ class Store(models.Model):
     created_at = models.DateTimeField(auto_created=True, default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        unique_together = (("user_id", "etsy_store_id"),)
+
 
 class Listing(models.Model):
     id = models.IntegerField(primary_key=True, auto_created=True)
