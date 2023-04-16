@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Please Confirm Listing Deletion</h2>
+    <p>Deleting the listing here does <b>NOT</b> delete the listing from your Etsy store.<br>
+    It will only delete it from your Etsy Window listings and you can add it back at any time<br>
+    by running the store cache again.</p>
+    <form method="post">
+        <h2 style="color: #0b7064;">{{ listing.title }}</h2>
+        <p><b>Image URL:</b> <a href="{{ listing.image_url }}" target="_blank">{{ listing.image_url }}</a></p>
+    
+        {% csrf_token %}
+        <div class="ml-auto">
+            <button class="btn btn-primary" name="action" value="confirm_delete_listing" type="submit" name="confirm_delete">Delete</button>
+            <button class="btn" type="submit" name="cancel">Cancel</button>
+        </div>
+        <input type="hidden" name="listing_id" value="{{ listing.listing_id }}">
+    </form>
+{% endblock %}
