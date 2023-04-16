@@ -45,9 +45,9 @@
     </div>
 
     {% if listings.has_other_pages %}
-    <div class="pagination">
+    <div class="paginator">
         {% if listings.has_previous %}
-        <a href="?page={{ listings.previous_page_number }}" class="pagination-link">previous</a>
+        <a href="?page={{ listings.previous_page_number }}" class="pagination-link">prev</a>
         {% endif %}
         <span class="current-page">{{ listings.number }}</span>
         {% if listings.has_next %}
@@ -55,4 +55,11 @@
         {% endif %}
     </div>
     {% endif %}
+    {% if listings.paginator.num_pages > listings.number %}
+    {% for page_num in page_obj.paginator.page_range %}
+        {% if page_num > page_obj.number and page_num <= page_obj.number|add:3 %}
+            <a href="?page={{ page_num }}">{{ page_num }}</a>
+        {% endif %}
+    {% endfor %}
+  {% endif %}
 {% endblock %}
