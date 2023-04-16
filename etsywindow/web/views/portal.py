@@ -4,6 +4,10 @@ from django.db.utils import IntegrityError
 from ..models import Store
 from .utils.etsy_helper import get_shop_data
 
+"""
+TODO: I need to have the user log into etsy for the store they are
+trying to claim
+"""
 
 def portal_home(request):
     if not request.user.is_authenticated:

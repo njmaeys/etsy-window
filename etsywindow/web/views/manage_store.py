@@ -17,8 +17,7 @@ def manage_store(request, store_id):
     listings = Listing.objects.filter(store_id=store.id)
 
     # Setup the paginator
-    #paginator = Paginator(listings, 12)
-    paginator = Paginator(listings, 9)
+    paginator = Paginator(listings, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
